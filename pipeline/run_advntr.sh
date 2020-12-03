@@ -113,7 +113,7 @@ do
     cmd="${cmd} && aws s3 cp ${DATADIR}/${FAMID}/results/${FAMID}_chr${chrom}_${sampid}.vcf ${GANGSTRDIR}/ "
 
     echo $cmd 
-done | xargs -n1 -I% -P5 sh -c "%"
+done 
 done 
 
 ### Cleanup before moving on to next job

@@ -36,11 +36,11 @@ ENC_SSC_SECRET_ACCESS_KEY=$(python3 ../src/encrypt.py ${MESSAGE} ${SSC_SECRET_AC
 
 # Read SSC family list
 while read -r FAMID CRAMSLIST; do
-  echo "Run advntr for ${FAMID} chrX"
+  echo "Run hipstr for ${FAMID} chrX"
   aws batch submit-job \
       --job-name ssc-${FAMID} \
       --job-queue ssc-denovo \
-      --job-definition ssc-hipstr-spark:2 \
-      --container-overrides 'command=["run_hipstr.sh",'"${CRAMSLIST}"','"${FAMID}"','"${ENC_SSC_ACCESS_KEY}"','"${ENC_SSC_SECRET_ACCESS_KEY}"', '"${SSC_PARAMS}"'],environment=[{name="BATCH_FILE_TYPE",value="script"},{name="BATCH_FILE_S3_URL",value="s3://ssc-advntr-denovos/scripts/run_advntr.sh"}]'
+      --job-definition ssc-hipstr-spark:3 \
+      --container-overrides 'command=["run_hipstr.sh",'"${CRAMSLIST}"','"${FAMID}"','"${ENC_SSC_ACCESS_KEY}"','"${ENC_SSC_SECRET_ACCESS_KEY}"', '"${SSC_PARAMS}"'],environment=[{name="BATCH_FILE_TYPE",value="script"},{name="BATCH_FILE_S3_URL",value="s3://ssc-hipstr-spark/scripts/run_hipstr.sh"}]'
 
 done <${SSC_FILE}

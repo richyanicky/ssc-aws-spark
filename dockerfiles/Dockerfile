@@ -33,6 +33,7 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -qqy \
  WORKDIR fusera-1.0.0
  RUN bash install.sh
 #
+ RUN pip3 install Crypto
 # # Add the fetch_and_run.sh script
  ADD fetch_and_run.sh /usr/local/bin/fetch_and_run.sh
 #
